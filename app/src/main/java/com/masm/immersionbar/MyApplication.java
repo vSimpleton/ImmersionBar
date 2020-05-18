@@ -3,6 +3,7 @@ package com.masm.immersionbar;
 import android.app.Application;
 import android.content.Context;
 
+import com.masm.immersionbar.utils.Constants;
 import com.tencent.bugly.crashreport.CrashReport;
 
 /**
@@ -21,7 +22,7 @@ public class MyApplication extends Application {
         mContext = getApplicationContext();
 
         //初始化Bugly
-        CrashReport.initCrashReport(getApplicationContext(), "fedd985d15", true);
+        CrashReport.initCrashReport(getApplicationContext(), Constants.BUGLY_APP_ID, BuildConfig.DEBUG);
     }
 
     public static Context getContext() {
