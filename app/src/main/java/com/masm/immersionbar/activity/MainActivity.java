@@ -2,6 +2,9 @@ package com.masm.immersionbar.activity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.ImageView;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +23,7 @@ public class MainActivity extends BaseActivity {
     private Toolbar mToolBar;
     private MainAdapter mAdapter;
     private ArrayList<MainBean> mMainData;
+    private ImageView mIvBanner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,5 +53,13 @@ public class MainActivity extends BaseActivity {
         mAdapter.isFirstOnly(false);
         mRcyMain.setAdapter(mAdapter);
         mAdapter.setNewData(mMainData);
+
+        addHeaderView();
+    }
+
+    private void addHeaderView() {
+        View bannerView = LayoutInflater.from(this).inflate(R.layout.item_banner, mRcyMain, false);
+        mIvBanner = bannerView.findViewById(R.id.ivBanner);
+        RecyclerView recyclerView = bannerView.findViewById(R.id.rcyContent);
     }
 }
