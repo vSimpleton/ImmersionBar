@@ -14,7 +14,7 @@ import com.masm.immersionbar.utils.AppManager;
  * DESC: Activity基类
  */
 
-public class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity {
 
     protected String TAG = "youzi";
     protected Activity mActivity;
@@ -24,7 +24,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppManager.getInstance().addActivity(this);
         mActivity = this;
-
+        setContentView(getLayoutId());
         initView();
         initData();
         initListener();
@@ -41,6 +41,8 @@ public class BaseActivity extends AppCompatActivity {
     protected void initListener() {
 
     }
+
+    protected abstract int getLayoutId();
 
     @Override
     protected void onDestroy() {

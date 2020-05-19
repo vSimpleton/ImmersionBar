@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.chad.library.adapter.base.viewholder.BaseViewHolder;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.masm.immersionbar.R;
 import com.masm.immersionbar.bean.MainBean;
 
@@ -32,6 +32,6 @@ public class MainAdapter extends BaseQuickAdapter<MainBean, BaseViewHolder> {
         ImageView ivIcon = helper.getView(R.id.ivIcon);
         ImageView ivFlower = helper.getView(R.id.ivFlower);
         ivFlower.setImageResource(item.getFlower());
-        Glide.with(getContext()).load(item.getPic()).into(ivIcon);
+        Glide.with(mContext).load(item.getPic()).into(ivIcon);
     }
 }
