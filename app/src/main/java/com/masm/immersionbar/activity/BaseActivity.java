@@ -1,4 +1,4 @@
-package com.masm.immersionbar;
+package com.masm.immersionbar.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
