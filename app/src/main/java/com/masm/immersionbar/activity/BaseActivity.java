@@ -27,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutId());
         initView();
         initData();
+        initRecyclerView();
         initListener();
     }
 
@@ -35,6 +36,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void initData() {
+
+    }
+
+    protected void initRecyclerView() {
 
     }
 

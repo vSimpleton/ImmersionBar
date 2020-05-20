@@ -1,11 +1,10 @@
 package com.masm.immersionbar.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
@@ -29,19 +28,15 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
 
     private RecyclerView mRcyMain;
-    private Toolbar mToolBar;
-    private MainAdapter mAdapter;
+    private MainAdapter mMainAdapter;
     private ArrayList<MainBean> mMainData;
+
+    private Toolbar mToolBar;
     private ImageView mIvBanner;
     private LinearLayoutManager mLayoutManager;
     private BannerAdapter mBannerAdapter;
-    private int mBannerPosition = -1;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initRecyclerView();
-    }
+    private int mBannerPosition = -1;
 
     @Override
     protected void initView() {
@@ -59,12 +54,13 @@ public class MainActivity extends BaseActivity {
         return R.layout.activity_main;
     }
 
-    private void initRecyclerView() {
-        mAdapter = new MainAdapter();
-        mAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_RIGHT);
-        mAdapter.isFirstOnly(false);
-        mRcyMain.setAdapter(mAdapter);
-        mAdapter.setNewData(mMainData);
+    @Override
+    protected void initRecyclerView() {
+        mMainAdapter = new MainAdapter();
+        mMainAdapter.openLoadAnimation(BaseQuickAdapter.SLIDEIN_RIGHT);
+        mMainAdapter.isFirstOnly(false);
+        mRcyMain.setAdapter(mMainAdapter);
+        mMainAdapter.setNewData(mMainData);
 
         addHeaderView();
     }
@@ -98,6 +94,25 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-        mAdapter.addHeaderView(bannerView);
+        mMainAdapter.addHeaderView(bannerView);
+    }
+
+    @Override
+    protected void initListener() {
+        mMainAdapter.setOnItemClickListener((adapter, view, position) -> {
+            MainBean mainBean = (MainBean) adapter.getData().get(position);
+            Intent intent = null;
+            switch (position) {
+                case 0:
+                    intent = new Intent(this, ParamsActivity.class);
+                    intent.putExtra("title", mainBean.getName());
+                    break;
+                case 1:
+                    break;
+            }
+            if (intent != null) {
+                startActivity(intent);
+            }
+        });
     }
 }
